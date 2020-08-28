@@ -1,3 +1,21 @@
+var parseEstimationValue = function(estimationValue) {
+	var sumInHours = 0;
+	var timeUnit = item[item.length-1];
+	var timeValue = parseFloat(item);
+	console.log("found card value: " + timeValue + " with unit " + timeUnit);
+
+	switch(timeUnit) {
+		case "w": sumInHours = timeValue * 8 * 5;
+		break;
+		case "d": sumInHours = timeValue * 8;
+		break;
+		case "h": sumInHours = timeValue;
+		break;
+		default: console.log("Oops. Don't know how to handle time unit '" + timeUnit + "'. Please report me!");
+	}
+	return sumInHours
+}
+
 var handleCard = function(card) {
 	console.log("new card " + $(card).data("issue-key"));
 
@@ -25,19 +43,7 @@ var handleCard = function(card) {
 	if (content.length > 1) {
 		console.log("card content: " + content);
 		content.split(" ").forEach(function(item, index) {
-			var timeUnit = item[item.length-1];
-			var timeValue = parseFloat(item);
-			console.log("found card value: " + timeValue + " with unit " + timeUnit);
-
-			switch(timeUnit) {
-				case "w": sumInHours += timeValue * 8 * 5;
-				break;
-				case "d": sumInHours += timeValue * 8;
-				break;
-				case "h": sumInHours += timeValue;
-				break;
-				default: console.log("Oops. Don't know how to handle time unit '" + timeUnit + "'. Please report me!");
-			}
+			sumInHours += parseEstimationValue(item)
 		});
 		return sumInHours;
 	}
@@ -62,21 +68,20 @@ var handleColumn = function(column, columnIdx, sumPerColumn, noPerColumn) {
 	
 };
 
-
- setInterval(function() {
+var refreshDashboard = function() {
 	var sumPerColumn = [];
 	var noPerColumn = [];
 
 	var swimlanes = $("#ghx-pool .ghx-swimlane");
-    swimlanes.each(function() {
-    	console.log("new swimlane ");
+	swimlanes.each(function() {
+		console.log("new swimlane ");
 		var columns = $(this).find(".ghx-columns .ghx-column");
 		var columnIdx = 0;
 		columns.each(function() {
 			handleColumn(this, columnIdx, sumPerColumn, noPerColumn);
 			++columnIdx;
 		});
-    });
+	});
 
 	var headers = $("#ghx-column-headers .ghx-column");
 	columnIdx = 0;
@@ -92,4 +97,8 @@ var handleColumn = function(column, columnIdx, sumPerColumn, noPerColumn) {
 		++columnIdx;
 	});
 
+};
+
+setInterval(function() {
+    refreshDashboard();
 }, 3000);
