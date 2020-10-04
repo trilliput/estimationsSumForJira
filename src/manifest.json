@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "icons": { "128": "static/images/icon.png" },
+  "browser_action": {
+    "default_icon": "static/images/icon.png"
+  },
+  "content_scripts": [{
+    "matches": ["http://*/secure/RapidBoard.jspa?*", "https://*/secure/RapidBoard.jspa?*"],
+    "js": [ "js/content.js" ],
+    "run_at" : "document_end"
+  }],
+  "name": "<%= package.name %>",
+  "version": "<%= package.version %>",
+  "description": "<%= package.description %>",
+  "author":  "<%= package.author %>"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "estimations-sum-for-jira",
+  "version": "2.0.0",
+  "description": "This extension sums up the remaining time estimates shown in a scrum board of Jira",
+  "author": "Dirk Räbiger",
+  "engines": {
+    "node": "7.0.0",
+    "npm": "3.10.8"
+  },
+  "scripts": {
+    "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
+    "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
+    "lint": "eslint src/js/",
+    "test": "mocha-webpack --watch --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
+    "test:ci": "mocha-webpack --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\""
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "popper.js": "^1.16.1",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^6.1.1",
+    "crx-webpack-plugin": "*",
+    "css-loader": "0.26.0",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eventemitter2": "0.4.14",
+    "mocha": "^8.1.3",
+    "sinon": "^9.0.3",
+    "webpack": "^4.44.2",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-node-externals": "^2.5.2",
+    "webpack-version-file-plugin": "^0.4.0",
+    "webpack-cli": "*"
+  },
+  "export-symbol": "extensionSkeleton.exports"
+}

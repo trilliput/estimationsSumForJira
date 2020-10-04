@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var parseEstimationValue = function(estimationValue) {
 	var sumInHours = 0;
 	var timeUnit = estimationValue[estimationValue.length-1];
@@ -96,7 +98,7 @@ var refreshDashboard = function() {
 	});
 
 	var headers = $("#ghx-column-headers .ghx-column");
-	columnIdx = 0;
+	var columnIdx = 0;
 	headers.each(function() {
 		console.log("new header");
 		var divQty = $(this).find(".sumcount");
