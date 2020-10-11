@@ -8,7 +8,10 @@
     "npm": "3.10.8"
   },
   "scripts": {
-    "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
+    "build-prod": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
+    "build-test": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.test.js",
+    "build-dev": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.dev.js",
+    "build": "npm run-script build-prod",
     "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
     "lint": "eslint src/js/",
     "test": "mocha-webpack --watch --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
@@ -21,6 +24,7 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "copy-webpack-plugin": "^6.1.1",
     "crx-webpack-plugin": "*",
     "css-loader": "0.26.0",
@@ -31,10 +35,10 @@
     "mocha": "^8.1.3",
     "sinon": "^9.0.3",
     "webpack": "^4.44.2",
+    "webpack-cli": "*",
     "webpack-dev-server": "^3.11.0",
     "webpack-node-externals": "^2.5.2",
-    "webpack-version-file-plugin": "^0.4.0",
-    "webpack-cli": "*"
+    "webpack-version-file-plugin": "^0.4.0"
   },
   "export-symbol": "extensionSkeleton.exports"
 }
